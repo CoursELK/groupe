@@ -1,0 +1,23 @@
+{
+    "name": "slamard/backend",
+    "autoload": {
+        "psr-4": {
+            "Slamard\\Backend\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sébastien Lamard",
+            "email": "sebastien.lamard@ecole-isitech.fr"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    },
+    "require": {
+        "elasticsearch/elasticsearch": "^8.13",
+        "php": "^8.0"
+    }
+}
