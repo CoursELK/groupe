@@ -1,5 +1,6 @@
 FROM php:8.0
 RUN mkdir /server
+RUN mkdir /server/logs
 WORKDIR /server
 COPY . .
 RUN apt-get update && \

@@ -3,7 +3,28 @@ services:
     build: ./backend
     ports:
       - '3000:3000'
+    networks:
+      - app
+      - logs
   react:
     build: ./frontend
     ports:
       - '8080:8080'
+    networks:
+      - app
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.13.4
+    ports:
+      - '9200:9200'
+    command:
+      - logstash -f /logstash/conf.d/logstash.conf
+    volumes:
+      - './logstash/logstash.conf:/logstash/conf.d/logstash.conf'
+    networks:
+      - logs
+    depends_on:
+      - php
+
+networks:
+  app: {}
+  logs: {}

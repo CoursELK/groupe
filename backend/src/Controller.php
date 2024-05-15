@@ -16,7 +16,10 @@ class Controller
 {
     const INDEX = 'earthquakes';
 
-    public function __construct(private Client $client)
+    public function __construct(
+        private Client $client,
+        private Logger $logger,
+    )
     {
     }
 
@@ -111,16 +114,20 @@ class Controller
 
     private function formatResponse(Elasticsearch $response): array
     {
+        $this->logger->info('Response received: ' . $response->asString());
+
         http_response_code(200);
         return $response->asArray();
     }
 
     private function formatError(Exception $e): array
     {
+        $this->logger->error('Error received with code ' . $e->getCode() . ': ' . $e->getMessage() . '. Trace: ' . $e->getTraceAsString());
+
         http_response_code($e->getCode());
         return [
             'message' => $e->getMessage(),
-            'trace' => $e->getTrace(),
+            'trace' => $e->getTraceAsString(),
         ];
     }
 }
