@@ -14,7 +14,7 @@ use stdClass;
 
 class Controller
 {
-    const INDEX = 'drivers_text';
+    const INDEX = 'earthquakes';
 
     public function __construct(private Client $client)
     {
@@ -90,7 +90,7 @@ class Controller
 
     private function matchAllFields(string $match, string $aggs = ''): array {
         $matches = [];
-        foreach (DriversEnum::toArray() as $property) {
+        foreach (EarthquakesEnum::toArray() as $property) {
             if ($property === $aggs) {
                 continue;
             }

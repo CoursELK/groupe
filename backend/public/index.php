@@ -52,12 +52,12 @@ if (str_starts_with($_SERVER['REQUEST_URI'], '/api/match')) {
     return;
 }
 
-//if (str_starts_with($_SERVER['REQUEST_URI'], '/api/aggs')) {
-//    echo $controller->aggs(
-//        key_exists('aggs', $params) ? $params['aggs'] : '',
-//        key_exists('match', $params) ? $params['match'] : '',
-//    );
-//}
+if (str_starts_with($_SERVER['REQUEST_URI'], '/api/aggs')) {
+    echo $controller->aggs(
+        key_exists('aggs', $params) ? $params['aggs'] : '',
+        key_exists('match', $params) ? $params['match'] : '',
+    );
+}
 
 http_response_code(404);
 echo json_encode([
