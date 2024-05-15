@@ -20,14 +20,14 @@ class Controller
     {
     }
 
-    public function matchAll(): string
+    public function matchAll(int $from): string
     {
         $params = [
             'index' => self::INDEX,
             'body' => [
-                'query' => [
-                    'match_all' => new stdClass(),
-                ],
+                'track_total_hits' => true,
+                'size' => 20,
+                'from' => $from,
             ],
         ];
         try {
@@ -39,7 +39,7 @@ class Controller
         return json_encode($response);
     }
 
-    public function match(string $match): string
+    public function match(string $match, int $from): string
     {
         $params = [
             'index' => self::INDEX,
@@ -49,6 +49,8 @@ class Controller
                         'should' => $this->matchAllFields($match),
                     ],
                 ],
+                'size' => 20,
+                'from' => $from,
             ]
         ];
 
@@ -61,7 +63,7 @@ class Controller
         return json_encode($response);
     }
 
-    public function aggs(string $aggs, string $match): string
+    public function aggs(string $aggs, string $match, int $from): string
     {
         $params = [
             'index' => self::INDEX,
@@ -73,6 +75,8 @@ class Controller
                         ],
                     ],
                 ],
+                'size' => 20,
+                'from' => $from,
             ],
         ];
         if (!empty($match)) {

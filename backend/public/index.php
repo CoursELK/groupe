@@ -34,21 +34,24 @@ try {
     return;
 }
 
+function getFrom(array $params) {
+    return key_exists('from', $params) ? $params['from'] : 0;
+}
+
 $params = [];
 if (key_exists('QUERY_STRING', $_SERVER)) {
     parse_str($_SERVER['QUERY_STRING'], $params);
 }
 
 if ($_SERVER['REQUEST_URI'] === '/api/match-all') {
-    echo $controller->matchAll();
+    echo $controller->matchAll(getFrom($params));
     return;
 }
 
 if (str_starts_with($_SERVER['REQUEST_URI'], '/api/match')) {
-
     echo key_exists('match', $params) ?
-        $controller->match($params['match'])
-        : $controller->matchAll();
+        $controller->match($params['match'], getFrom($params))
+        : $controller->matchAll(getFrom($params));
     return;
 }
 
@@ -56,6 +59,7 @@ if (str_starts_with($_SERVER['REQUEST_URI'], '/api/aggs')) {
     echo $controller->aggs(
         key_exists('aggs', $params) ? $params['aggs'] : '',
         key_exists('match', $params) ? $params['match'] : '',
+        getFrom($params),
     );
 }
 
