@@ -1,6 +1,8 @@
 FROM php:8.0
 RUN mkdir /server
 RUN mkdir /server/logs
+RUN touch /server/logs/server.log
+RUN chmod -R 0777 /server/logs
 WORKDIR /server
 COPY . .
 RUN apt-get update && \

@@ -9,7 +9,7 @@ use RuntimeException;
 
 class Logger
 {
-    const LOGS_DIR = __DIR__ . '../logs/';
+    const LOGS_DIR = __DIR__ . '/../logs/';
 
     public function info(string $logs): void
     {
@@ -39,10 +39,7 @@ class Logger
 
     private function openFile()
     {
-        $filename = self::LOGS_DIR . 'server-' . (new DateTimeImmutable())->format('Ymd') . '.log';
-        if (!file_exists($filename)) {
-            touch($filename);
-        }
+        $filename = self::LOGS_DIR . 'server.log';
         $file = fopen($filename, 'w+');
         if ($file === false) {
             throw new RuntimeException('Could not open log file');
