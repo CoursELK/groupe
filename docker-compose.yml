@@ -3,3 +3,7 @@ services:
     build: ./backend
     ports:
       - '3000:3000'
+  react:
+    build: ./frontend
+    ports:
+      - '8080:8080'
