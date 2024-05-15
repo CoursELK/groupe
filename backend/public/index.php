@@ -29,7 +29,7 @@ function sendError(string $message, int $code, string $trace = ''): void
 }
 
 function getFrom(array $params) {
-    return key_exists('from', $params) ? $params['from'] : 0;
+    return key_exists('from', $params) ? (int) $params['from'] : 0;
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
