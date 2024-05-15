@@ -25,3 +25,7 @@ Backend calls ElasticSearch client differently depending on the route that's cal
 - /api/match launches a bool/should query on every field of the dataset with query parameter 'match'
 - /api/aggs launches an aggs query on the field described in 'aggs' parameter. 
 If a 'match' parameter is given, it also matches it.
+
+## Dataset
+
+The app relies on a dataset containing a list of earthquakes from 2001 to 2023
