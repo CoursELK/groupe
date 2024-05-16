@@ -28,7 +28,7 @@ function sendError(string $message, int $code, string $trace = ''): void
     ]);
 }
 
-function getFrom(array $params) {
+function getFrom(array $params): int {
     return key_exists('from', $params) ? (int) $params['from'] : 0;
 }
 
