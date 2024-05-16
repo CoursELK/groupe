@@ -1,20 +1,13 @@
 services:
   php:
     build: ./backend
+    restart: always
     ports:
       - '3000:3000'
     volumes:
       - './backend/logs:/logs'
   react:
     build: ./frontend
+    restart: always
     ports:
       - '8080:8080'
-  logstash:
-    image: docker.elastic.co/logstash/logstash:8.13.4
-    volumes:
-      - './logstash/logstash.conf:/logstash/conf.d/logstash.conf'
-      - './logstash/patterns:/logstash/patterns/patterns'
-      - './backend/logs:/logs'
-    command: logstash -f /logstash/conf.d/logstash.conf
-    depends_on:
-      - php
