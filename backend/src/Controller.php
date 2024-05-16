@@ -114,7 +114,10 @@ class Controller
 
     private function formatResponse(Elasticsearch $response): array
     {
-        $this->logger->info('Response received: ' . $response->asString());
+        $this->logger->info(json_encode([
+            'code' => $response->getStatusCode(),
+            'message' => 'Response received for route: GET ' . self::INDEX . '/_search',
+        ]));
 
         http_response_code(200);
         return $response->asArray();
@@ -122,7 +125,11 @@ class Controller
 
     private function formatError(Exception $e): array
     {
-        $this->logger->error('Error received with code ' . $e->getCode() . ': ' . $e->getMessage() . '. Trace: ' . $e->getTraceAsString());
+        $this->logger->error(json_encode([
+            'code' => $e->getCode(),
+            'message' => $e->getMessage(),
+            'trace' => $e->getTraceAsString(),
+        ]));
 
         http_response_code($e->getCode());
         return [

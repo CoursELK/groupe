@@ -1,0 +1,3 @@
+STRING [a-zA-Z0-9._\b\t\{\}\[\]"-]+
+DATETIME %{YEAR}-%{MONTHNUM2}-%{MONTHDAY}\b%{HOUR}:%{MINUTE}:%{SECOND}
+CODE \d{3}

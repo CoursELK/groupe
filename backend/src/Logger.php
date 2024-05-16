@@ -9,7 +9,7 @@ use RuntimeException;
 
 class Logger
 {
-    const LOGS_DIR = __DIR__ . '/../logs/';
+    const LOGS_DIR = '/logs/';
 
     public function info(string $logs): void
     {
@@ -33,7 +33,7 @@ class Logger
             'date_time' => (new DateTimeImmutable())->format('Y-m-d H:i:s'),
             'type' => $type,
             'message' => $logs,
-        ]));
+        ]) . PHP_EOL);
         fclose($file);
     }
 
