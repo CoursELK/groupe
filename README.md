@@ -8,7 +8,7 @@
 
 To start the project, just launch this command in your terminal:
 ```bash
-docker compose up
+docker compose up --build
 ```
 
 ## Features
